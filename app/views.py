@@ -10,16 +10,19 @@ def index():
     View root page function that returns the index page and its data
     '''
     #getting floods news
-    floods_news=get_news('floods')
-    tech_news=get_news('technology')
+  
     title='Home-Welcome to the news app'
     message="Welcome to the News App"
+    news=get_news('bbc')
+    cnn_news=get_news('cnn')
+    
+    
     search_news = request.args.get('news_query')
 
     if search_news:
         return redirect(url_for('search',query=search_news))
     else:
-        return render_template('index.html',message=message, floods=floods_news, tech=tech_news)
+        return render_template('index.html',message=message,news=news,)
 
 @app.route('/news/<query>')
 def article(query):

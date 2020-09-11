@@ -2,12 +2,13 @@
 
     {% for news in news_list %}
         
-        <li class="text-center">
+        
             <a href="{{news.url}}">
                 <h3>{{ news.title}}</h3></a>
             <p>{{news.description}}</p>
             <P><i>{{news.author}}<br>{{news.published_at}}</i></P>
-        </li>
+        
+        <hr>
     {% endfor %}
 
 {% endmacro %}
