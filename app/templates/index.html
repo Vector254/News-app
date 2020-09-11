@@ -1,5 +1,6 @@
 <h1> {{ message }} </h1>
 <!DOCTYPE html>
+{% import 'macros.html' as macro%}
 <html>
     <head>
         <meta charset="utf-8">
@@ -13,17 +14,13 @@
         <!-- floods news section  -->
         <h3> floods news</h3>
          <ul>
-            {% for floods_news in floods %}
-                <li>{{ floods_news.title}}</li>
-            {% endfor %}
+            {{ macro.displayNewsList(floods)}}
         </ul>
 
         <!-- technology news section  -->
         <h3> tech news</h3>
          <ul>
-            {% for tech_news in tech %}
-                <li>{{ tech_news.title}}</li>
-            {% endfor %}
+            {{ macro.displayNewsList(technology)}}
         </ul>
         
 
