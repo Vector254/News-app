@@ -53,3 +53,38 @@ def process_results(news_list):
         news_results.append(news_object)
 
     return news_results
+
+def get_article(query):
+    get_article_details_url = base_url.format(query,api_key)
+
+    with urllib.request.urlopen(get_article_details_url) as url:
+        article_details_data = url.read()
+        article_details_response = json.loads(article_details_data)
+
+        article_object = None
+        if article_details_response:
+            source = article_details_response.get('source')
+            author= article_details_response.get('author')
+            title = article_details_response.get('title')
+            description = article_details_response.get('description')
+            url = article_details_response.get('url')
+            published_at = article_details_response.get('publishedAt')
+
+            article_object = Article(source,author,title,description,url,published_at)
+
+    return article_object
+
+def search_news(query):
+    search_news_url = 'https://newsapi.org/v2/everything?q={}&apiKey={}'.format(query,api_key)
+    with urllib.request.urlopen(search_news_url) as url:
+        search_news_data = url.read()
+        search_news_response = json.loads(search_news_data)
+
+        search_news_results = None
+
+        if search_news_response['articles']:
+            search_news_list = search_news_response['articles']
+            search_news_results = process_results(search_news_list)
+
+
+    return search_news_results
