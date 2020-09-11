@@ -11,10 +11,10 @@ def index():
     '''
     #getting floods news
     floods_news=get_news('floods')
-    print(floods_news)
+    tech_news=get_news('technology')
     title='Home-Welcome to the news app'
     message="Welcome to the News App"
-    return render_template('index.html',message=message)
+    return render_template('index.html',message=message, floods=floods_news, tech=tech_news)
 
 @app.route('/top-headlines/<country>')
 def movie(country):

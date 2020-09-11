@@ -14,10 +14,18 @@
         <h3> floods news</h3>
          <ul>
             {% for floods_news in floods %}
-                <li>{{ floods_news.description}}</li>
+                <li>{{ floods_news.title}}</li>
             {% endfor %}
         </ul>
 
+        <!-- technology news section  -->
+        <h3> tech news</h3>
+         <ul>
+            {% for tech_news in tech %}
+                <li>{{ tech_news.title}}</li>
+            {% endfor %}
+        </ul>
+        
 
     </body>
 </html>
