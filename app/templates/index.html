@@ -10,6 +10,14 @@
         {% endif %}
     </head>
     <body>
+        <!-- floods news section  -->
+        <h3> floods news</h3>
+         <ul>
+            {% for floods_news in floods %}
+                <li>{{ floods_news.description}}</li>
+            {% endfor %}
+        </ul>
+
 
     </body>
 </html>

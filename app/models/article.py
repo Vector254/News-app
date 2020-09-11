@@ -4,10 +4,9 @@ class Article:
     '''
 
     def __init__(self,source,author,title,description,url,published_at):
-        self.source = source.name
+        self.source = source
         self.author=author
         self.title = title
         self.description = description
         self.url = url
-        self.vote_average = vote_average
-        self.published_at =publishedAt
+        self.published_at =published_at
