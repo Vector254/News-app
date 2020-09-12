@@ -11,31 +11,25 @@
 <div class="container">
     <div class="row">
         
-    <form class="col-md-6">
+    <form >
         <input type="text" name="news_query" placeholder="Search for news" class="form-control">
         <input type="submit"  value="Submit" class="btn btn-default">
     </form>
     
     </div>
-<div class="row">
 
-    <div class="col-md-6">
 
-        <h3 class='text-center'> <u>BBC HEADLINES</u></h3>
+    <div class="row">
+        <h3 class='text-center'> <u> HEADLINES</u></h3>
         <ul>
             {{ macro.displayNewsList(news)}}
         </ul>
+    
+
+
     </div>
 
-    <div class="col-md-6">
-        <h3 class='text-center'> <u>CNN HEADLINES</u></h3>
-        <ul>
 
-        {{ macro.displayCnnList(cnn_news)}}
-
-    </ul>
-</div>
-</div>
 </div>
 
 

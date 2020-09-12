@@ -1,31 +1,34 @@
 {% macro displayNewsList(news_list) %}
 
-    {% for news in news_list %}
+    {% for sources in news_list %}
         
         
-            <a href="{{news.url}}">
-                <h3>{{ news.title}}</h3></a>
-            <p>{{news.description}}</p>
-            <P><i>{{news.author}}<br>{{news.published_at}}</i></P>
-        
-        <hr>
-    {% endfor %}
-
-{% endmacro %}
-
-{% macro displayCnnList(news_list) %}
-
-    {% for cnn in news_list %}
-        
-        
-            <a href="{{cnn.url}}">
-                <h3>{{ cnn.title}}</h3></a>
-            <p>{{cnn.description}}</p>
-            <P><i>{{cnn.author}}<br>{{cnn.published_at}}</i></P>
+            <a href="/sources/{{sources.id}}">
+                <h3>{{ sources.name}}</h3></a>
+                <p>{{sources.id}}</p>
+            <p>{{sources.description}}</p>
+            
         
         <hr>
     {% endfor %}
 
 {% endmacro %}
+
+{% macro displayResults(articles_list) %}
+
+{% for article in articles_list %}
+        
+        
+<a href="{{article.url}}">
+    <h3>{{ article.title}}</h3></a>
+<p>{{article.description}}</p>
+<p>posted on:-<i>{{article.date|truncate(13)}}</i> by <i>{{article.author}} </i></p>
+
+
+<hr>
+{% endfor %}
+{% endmacro %}
+
+
 
 

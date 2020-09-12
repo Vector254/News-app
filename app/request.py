@@ -1,20 +1,22 @@
 from app import app
 import urllib.request,json
-from .models import article
+from .models import article,source
 
-Article=article.Article
+Article=article.Articles
+Source=source.Source
 
 # Getting api key
 api_key = app.config['NEWS_API_KEY']
 
 # Getting the news base url
 base_url = app.config["NEWS_API_BASE_URL"]
+article_url=app.config["NEWS_API_ART_URL"]
 
-def get_news(source):
+def get_news(category):
     '''
     Function that gets the json response to our url request
     '''
-    get_news_url = base_url.format(source,api_key)
+    get_news_url = base_url.format(category,api_key)
 
     with urllib.request.urlopen(get_news_url) as url:
         get_news_data = url.read()
@@ -22,8 +24,8 @@ def get_news(source):
 
         news_results = None
 
-        if get_news_response['articles']:
-            news_results_list = get_news_response['articles']
+        if get_news_response['sources']:
+            news_results_list = get_news_response['sources']
             news_results = process_results(news_results_list)
 
 
@@ -41,15 +43,14 @@ def process_results(news_list):
     '''
     news_results = []
     for news_item in news_list:
-        source = news_item.get('source')
-        author= news_item.get('author')
-        title = news_item.get('title')
+        id=news_item.get('id')
+        name = news_item.get('name')
         description = news_item.get('description')
         url = news_item.get('url')
-        published_at = news_item.get('publishedAt')
+        
 
         
-        news_object = Article(source,author,title,description,url,published_at)
+        news_object = Source(id,name,description,url)
         news_results.append(news_object)
 
     return news_results
@@ -58,7 +59,7 @@ def get_articles(id):
 	'''
 	Function that processes the articles and returns a list of articles objects
 	'''
-	get_articles_url = base_url.format(id,api_key)
+	get_articles_url = article_url.format(id,api_key)
 
 	with urllib.request.urlopen(get_articles_url) as url:
 		articles_results = json.loads(url.read())
@@ -78,20 +79,15 @@ def process_articles(articles_list):
 		id = article_item.get('id')
 		author = article_item.get('author')
 		title = article_item.get('title')
-		description = article_item.get('description')
+		content = article_item.get('content')
 		url = article_item.get('url')
 		image = article_item.get('urlToImage')
 		date = article_item.get('publishedAt')
 		
 		if image:
-			articles_result = Articles(id,author,title,description,url,image,date)
+			articles_result = Article(id,author,title,content,url,image,date)
 			articles_object.append(articles_result)	
 		
-
-		
-
-		
-
 	return articles_object
 
 def search_news(query):
@@ -104,7 +100,7 @@ def search_news(query):
 
         if search_news_response['articles']:
             search_news_list = search_news_response['articles']
-            search_news_results = process_results(search_news_list)
+            search_news_results = process_articles(search_news_list)
 
 
     return search_news_results
