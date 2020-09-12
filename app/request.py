@@ -54,25 +54,45 @@ def process_results(news_list):
 
     return news_results
 
-def get_article(query):
-    get_article_details_url = base_url.format(query,api_key)
+def get_articles(id):
+	'''
+	Function that processes the articles and returns a list of articles objects
+	'''
+	get_articles_url = base_url.format(id,api_key)
 
-    with urllib.request.urlopen(get_article_details_url) as url:
-        article_details_data = url.read()
-        article_details_response = json.loads(article_details_data)
+	with urllib.request.urlopen(get_articles_url) as url:
+		articles_results = json.loads(url.read())
 
-        article_object = None
-        if article_details_response:
-            source = article_details_response.get('source')
-            author= article_details_response.get('author')
-            title = article_details_response.get('title')
-            description = article_details_response.get('description')
-            url = article_details_response.get('url')
-            published_at = article_details_response.get('publishedAt')
 
-            article_object = Article(source,author,title,description,url,published_at)
+		articles_object = None
+		if articles_results['articles']:
+			articles_object = process_articles(articles_results['articles'])
 
-    return article_object
+	return articles_object
+
+def process_articles(articles_list):
+	'''
+	'''
+	articles_object = []
+	for article_item in articles_list:
+		id = article_item.get('id')
+		author = article_item.get('author')
+		title = article_item.get('title')
+		description = article_item.get('description')
+		url = article_item.get('url')
+		image = article_item.get('urlToImage')
+		date = article_item.get('publishedAt')
+		
+		if image:
+			articles_result = Articles(id,author,title,description,url,image,date)
+			articles_object.append(articles_result)	
+		
+
+		
+
+		
+
+	return articles_object
 
 def search_news(query):
     search_news_url = 'https://newsapi.org/v2/everything?q={}&apiKey={}'.format(query,api_key)
