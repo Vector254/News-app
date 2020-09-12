@@ -13,7 +13,7 @@ def index():
   
     title='Home-Welcome to the news app'
     message="Welcome to the News App"
-    news=get_news('bbc')
+    news=get_news('bbc-news')
     cnn_news=get_news('cnn')
     
     
@@ -22,7 +22,7 @@ def index():
     if search_news:
         return redirect(url_for('search',query=search_news))
     else:
-        return render_template('index.html',message=message,news=news,)
+        return render_template('index.html',message=message,news=news,cnn_news=cnn_news)
 
 @app.route('/news/<query>')
 def article(query):

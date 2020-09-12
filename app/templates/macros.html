@@ -13,3 +13,19 @@
 
 {% endmacro %}
 
+{% macro displayCnnList(news_list) %}
+
+    {% for cnn in news_list %}
+        
+        
+            <a href="{{cnn.url}}">
+                <h3>{{ cnn.title}}</h3></a>
+            <p>{{cnn.description}}</p>
+            <P><i>{{cnn.author}}<br>{{cnn.published_at}}</i></P>
+        
+        <hr>
+    {% endfor %}
+
+{% endmacro %}
+
+
