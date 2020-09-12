@@ -1,9 +1,9 @@
 from flask import render_template,request,redirect,url_for
-from app import app
-from .request import get_news,get_articles, search_news
+from . import main
+from ..request import get_news,get_articles, search_news
 
 # Views
-@app.route('/')
+@main.route('/')
 def index():
 
     '''
@@ -24,7 +24,7 @@ def index():
     else:
         return render_template('index.html',message=message,news=news)
 
-@app.route('/sources/<id>')
+@main.route('/sources/<id>')
 def articles(id):
 	'''
 	view articles page
@@ -34,7 +34,7 @@ def articles(id):
 
 	return render_template('articles.html',articles = articles)
 
-@app.route('/search/<query>')
+@main.route('/search/<query>')
 def search(query):
     '''
     View function to display the search results
