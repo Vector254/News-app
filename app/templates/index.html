@@ -12,18 +12,19 @@
     <div class="row">
         
     <form >
-        <input type="text" name="news_query" placeholder="Search for news" class="form-control">
-        <input type="submit"  value="Submit" class="btn btn-default">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+        <input type="text" name="news_query" placeholder="enter any topic to search for news" class="form-control">
+        </div>
+        <input type="submit"  value="search" class="btn btn-default">
     </form>
     
     </div>
 
 
     <div class="row">
-        <h3 class='text-center'> <u>News Sources</u></h3>
-        <ul>
+        
             {{ macro.displayNewsList(news)}}
-        </ul>
+        
     
 
 

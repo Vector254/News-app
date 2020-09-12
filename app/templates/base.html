@@ -1,9 +1,7 @@
-
-<div class="jumbotron"><h1> {{ message }} </h1>
-    {% block navbar %}
-    {% include 'navbar.html' %}
-{% endblock %}
-</div>   
 {% extends 'bootstrap/base.html'%}
 
+
 <!-- Navbar block  --> 
+{% block navbar %}
+    {% include 'navbar.html' %}
+{% endblock %}
