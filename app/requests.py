@@ -4,18 +4,22 @@ from .models import Articles,Source
 
 
 
+
+
 # Getting api key
 api_key = None
 
 # Getting the news base url
 base_url=None
+#Getting the articles base url
+article_url=None
 
 
 def configure_request(app):
     global api_key,base_url
     api_key = app.config['NEWS_API_KEY']
     base_url = app.config["NEWS_API_BASE_URL"]
-    article_url=app.config["NEWS_API_ART_URL"]
+    article_url = app.config["ARTICLE_URL"]
 
 def get_news(category):
     '''
@@ -48,23 +52,25 @@ def process_results(news_list):
     '''
     news_results = []
     for news_item in news_list:
-        id=news_item.get('id')
+        source=news_item.get('id')
         name = news_item.get('name')
         description = news_item.get('description')
-        url = news_item.get('url')
+       
         
 
         
-        news_object = Source(id,name,description,url)
+        news_object = Source(source,name,description)
         news_results.append(news_object)
 
     return news_results
 
-def get_articles(id):
+def get_articles(source):
 	'''
 	Function that processes the articles and returns a list of articles objects
 	'''
-	get_articles_url = article_url.format(id,api_key)
+   
+	get_articles_url = article_url.format(source,api_key)
+   
 
 	with urllib.request.urlopen(get_articles_url) as url:
 		articles_results = json.loads(url.read())
@@ -89,9 +95,9 @@ def process_articles(articles_list):
 		image = article_item.get('urlToImage')
 		date = article_item.get('publishedAt')
 		
-		if image:
-			articles_result = Articles(id,author,title,content,url,image,date)
-			articles_object.append(articles_result)	
+		
+		articles_result = Articles(id,author,title,content,url,image,date)
+		articles_object.append(articles_result)	
 		
 	return articles_object
 
