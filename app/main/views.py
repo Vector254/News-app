@@ -25,15 +25,12 @@ def index():
     else:
         return render_template('index.html',message=message,news=news)
 
-@main.route('/source/<id>')
+@main.route('/sources/<id>')
 def articles(id):
-	'''
-	view articles page
-	'''
-	articles = get_articles(id)
-	
-
+	'''view articles function that returns the articles page'''
+	articles =get_articles(id)
 	return render_template('articles.html',articles = articles)
+
 @main.route('/search/<query>')
 def search(query):
     '''
