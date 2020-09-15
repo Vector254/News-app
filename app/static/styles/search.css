@@ -1,7 +1,38 @@
-.container{
-    background-color: beige;
-}
-.pic{
-    width: 100px;
-    height: 100px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Share&display=swap');
+
+
+    body {font-family: 'Share', cursive;}
+ 
+    .nav{
+        
+        background-color: lightseagreen;
+        height: 70px;
+        margin-bottom: 30px;
+        border-bottom: black;
+        border-bottom-width: 2px;
+        border-bottom-style: solid;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 9999;
+        
+    }
+    h2{
+        padding-left: 10px;
+    }
+    
+    #link{
+        color:lightseagreen;
+     float: right;
+     padding-left: 10px;
+     
+     text-decoration: none;
+     background-color: black;
+     height: 70px;
+     width: 80px;
+     margin-top: -20px;
+     padding-top: 20px;
+    }
+    #link:hover{ 
+        background-color: lightslategray;
+    }
