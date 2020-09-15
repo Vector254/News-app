@@ -1,6 +1,6 @@
 import unittest
-from models import article
-Article = article.Article
+from app.models import Articles
+
 
 class ArticleTest(unittest.TestCase):
     '''
@@ -11,13 +11,23 @@ class ArticleTest(unittest.TestCase):
         '''
         Set up method that will run before every Test
         '''
-        self.new_article = Article('The Next Web','The cosmic companion','The Moon’s surface is rusting',
-        'Dust on the Moon discovered by the Chandrayaan-1 spacecraft orbiting our planet',
-        'https://thenextweb.com/syndication/2020/09/11/the-moons-surface-is-rusting-and-earth-may-be-to-blame/','2020-09-11T09:00:22Z')
+        self.new_article = Articles('bbc-news','kevin wright','the epidemic pandemic',
+        'coronavirus has become more than just an epidemic, threatening to wipe off the human race',
+        'https://www.nytimes.com/2020/08/22/sunday-review/coronavirus-poverty-child-allowance.html',
+        'https://static01.nyt.com/images/2020/08/23/opinion/sunday/21Deparle/21Deparle-facebookJumbo.jpg',
+        '2018-04-11T07:57:16Z')
 
     def test_instance(self):
-        self.assertTrue(isinstance(self.new_article,Article))
+        self.assertTrue(isinstance(self.new_article,Articles))
+
+    def test_variables(self):
+        self.assertEqual(self.new_article.id,'bbc-news')
+        self.assertEqual(self.new_article.author,'kevin wright')
+        self.assertEqual(self.new_article.title,'the epidemic pandemic')
+        self.assertEqual(self.new_article.description,'coronavirus has become more than just an epidemic, threatening to wipe off the human race')
+        self.assertEqual(self.new_article.url,'https://www.nytimes.com/2020/08/22/sunday-review/coronavirus-poverty-child-allowance.html')
+        self.assertEqual(self.new_article.image,'https://static01.nyt.com/images/2020/08/23/opinion/sunday/21Deparle/21Deparle-facebookJumbo.jpg')
+        self.assertEqual(self.new_article.date,'2018-04-11T07:57:16Z')
 
 
-if __name__ == '__main__':
-    unittest.main()
+

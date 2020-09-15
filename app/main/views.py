@@ -27,7 +27,7 @@ def index():
 
 @main.route('/sources/<id>')
 def articles(id):
-	'''view articles function that returns the articles page'''
+	'''view function that returns the articles page'''
 	articles =get_articles(id)
 	return render_template('articles.html',articles = articles)
 
